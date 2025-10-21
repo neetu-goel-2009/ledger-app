@@ -1,20 +1,29 @@
 import { AppDispatch } from "../../store/store";
-import { setToggleStatus, setDynamicFormData, saveDynamicFormData } from "../../store/components/uiInteraction/uiInteraction";
+import { setToggleStatus, setDynamicFormData, loadDynamicFormData, updateDynamicFormData } from "../../store/components/uiInteraction/uiInteraction";
 // import { LoginFormExtras } from '../../components/login/LoginFormExtras';
-import { setFormData } from "../../store/components/users/users";
+import { setFormData, setUser } from "../../store/components/users/users";
 
 export const handleProfileUpdate = (dispatch: AppDispatch, userFormData, data: { user: any }) => {
   // close the original popup 
   dispatch(setToggleStatus({ key: "profilePage", status: false }));
 
+  // Map user data to form field names
+  const id = data.user.id || null;
+
   const onSubmitCB = (values: any) => {
-    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa onSubmitCB");
-    dispatch(saveDynamicFormData("", values))
+    if (id) {
+      dispatch(updateDynamicFormData(`/users/${id}`, values)())
       .unwrap()
       .then(() => {
         dispatch(setToggleStatus({ key: "dynamicForm", status: false }));
-        loadLibraryData();
+        dispatch(loadDynamicFormData(`/users/${id}`)())
+        .unwrap()
+        .then((response) => {
+          // Handle successful form data loading
+          dispatch(setUser(response));
+        });
       });
+    }
   };
 
   // First get the current form structure
@@ -23,8 +32,8 @@ export const handleProfileUpdate = (dispatch: AppDispatch, userFormData, data: {
   // Map user data to form field names
   const mappedUserData = {
     name: data.user.name || data.user.fullName,
-    username: data.user.email,  // Using email as username
-    phone: data.user.mobile || data.user.phone,
+    email: data.user.email,  // Using email as email
+    mobile: data.user.mobile || '',
   };
 
   // Prepare the form data with mapped values
@@ -42,6 +51,10 @@ export const handleProfileUpdate = (dispatch: AppDispatch, userFormData, data: {
     { 
       key: "formData", 
       value: updatedFormData
+    },
+    {
+      key: "submitCB",
+      value: onSubmitCB,
     },
   ]));
   

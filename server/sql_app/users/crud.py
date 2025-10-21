@@ -15,15 +15,15 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
-
 def create_user(db: Session, user: schemas.UserCreate):
     # For Google users, password may be None
-    fake_hashed_password = (user.password + "notreallyhashed") if user.password else None
+    import hashlib
+    hashed_password = hashlib.md5(user.password.encode()).hexdigest() if user.password else None
     db_user = models.User(
         email=user.email,
         mobile=user.mobile,
         misc=user.misc,
-        hashed_password=fake_hashed_password,
+        hashed_password=hashed_password,
         name=getattr(user, "name", None),
         picture=getattr(user, "picture", None),
     )

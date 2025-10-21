@@ -9,6 +9,7 @@ import {
   View,
 } from "framework7-react";
 import CloseIcon from "@mui/icons-material/Close";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import {
   Box,
   Typography,
@@ -127,6 +128,56 @@ export default (props) => {
                   {dynamicFormData && dynamicFormData.formData?.subTitle ? dynamicFormData.formData.subTitle : "Please fill in the required information"}
                 </Typography>
               </Box>
+
+              {/* Error Display */}
+              {dynamicFormData && dynamicFormData.error && (
+                <Box 
+                  sx={{ 
+                    padding: '16px 20px',
+                    margin: '16px 24px 0 24px',
+                    backgroundColor: 'error.main',
+                    backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))',
+                    color: 'error.contrastText',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    boxShadow: '0 2px 8px rgba(211, 47, 47, 0.15)', // subtle red shadow
+                    border: '1px solid',
+                    borderColor: 'error.dark',
+                  }}
+                >
+                  <ErrorOutlineIcon sx={{ 
+                    fontSize: 24,
+                    flexShrink: 0,
+                  }} />
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      fontWeight: 500,
+                      flex: 1,
+                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                    }}
+                  >
+                    {dynamicFormData.error}
+                  </Typography>
+                  <IconButton
+                    size="small"
+                    onClick={() => dispatch(setDynamicFormData([{ key: "error", value: null }]))}
+                    sx={{
+                      color: 'error.contrastText',
+                      opacity: 0.8,
+                      '&:hover': {
+                        opacity: 1,
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                      },
+                      marginRight: -1
+                    }}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </Box>
+              )}
 
               {/* Form Content */}
               <Box sx={{ padding: 3 }}>

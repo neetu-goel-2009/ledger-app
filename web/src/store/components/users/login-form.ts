@@ -9,9 +9,9 @@ const loginForm = {
     {
       element: "input",
       type: "text",
-      name: "username",
-      label: "Username",
-      placeholder: "Enter Username",
+      name: "email",
+      label: "E-Mail",
+      placeholder: "Enter E-Mail",
       value: "",
       validation: "email",
     },

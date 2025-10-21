@@ -11,9 +11,9 @@ export const handleGoogleLogin = async (dispatch: AppDispatch) => {
     const idToken = await getGoogleIdToken(clientId);
     const res = await axios.post(`${AUTH_CONFIG.apiEndpoint}/users/google-login`, { id_token: idToken });
     
-    // Store user data and token
-    dispatch(setUser(res.data));
-    dispatch(setToken(idToken));
+    // Store user data and token in Redux
+    dispatch(setUser(res.data.user));
+    dispatch(setToken({ mode: res.data.mode, token: res.data.token, refresh_token: res.data.refresh_token }));
     
     // Close login modal
     dispatch(setToggleStatus({ key: "dynamicForm", status: false }));

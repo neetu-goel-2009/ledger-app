@@ -170,7 +170,7 @@ export default () => {
                     </ListItemIcon>
                     <ListItemText
                       primary="Phone"
-                      secondary={user.phone || 'No phone provided'}
+                      secondary={user.mobile || 'No phone provided'}
                       primaryTypographyProps={{ fontWeight: 500 }}
                     />
                   </ListItem>

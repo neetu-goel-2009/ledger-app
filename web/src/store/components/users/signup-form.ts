@@ -19,7 +19,7 @@ const signupForm = {
     {
       element: "input",
       type: "text",
-      name: "username",
+      name: "email",
       label: "E-Mail",
       placeholder: "Enter E-Mail",
       value: "",
@@ -37,11 +37,11 @@ const signupForm = {
     {
       element: "input",
       type: "text",
-      name: "phone",
+      name: "mobile",
       label: "Mobile",
       placeholder: "Enter Mobile No.",
       value: "",
-      validation: "phoneno",
+      validation: "mobile",
     },
   ],
   loadData: null,

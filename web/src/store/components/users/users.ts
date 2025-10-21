@@ -45,7 +45,8 @@ const initialState: UsersState = {
 export const verifyStoredToken = createAsyncThunk(
   'users/verifyToken',
   async (_, { dispatch }) => {
-    const token = localStorage.getItem('auth_token');
+    const authData = localStorage.getItem('auth_data') ? JSON.parse(localStorage.getItem('auth_data') || '{}') : {};
+    const token = authData.token || null;
     if (!token) return null;
 
     try {
@@ -53,13 +54,13 @@ export const verifyStoredToken = createAsyncThunk(
       console.log({ response })
       if (response.valid) {
         dispatch(setUser(response.user));
-        dispatch(setToken(token));
+        // dispatch(setToken(token));
         return response.user;
       }
-      // dispatch(logout());
+      dispatch(logout());
       return null;
     } catch (error) {
-      // dispatch(logout());
+      dispatch(logout());
       console.log({ error })
       return null;
     }
@@ -116,11 +117,11 @@ export const usersSlice = createSlice({
 
     // Store token in state and persist to localStorage
     setToken: (state, action) => {
-      const token = action.payload;
-      state.token = token || null;
+      const payload = action.payload;
+      state.token = payload.token || null;
       if (typeof window !== 'undefined') {
         try {
-          localStorage.setItem('auth_token', token);
+          localStorage.setItem('auth_data', JSON.stringify(payload));
         } catch (e) {
           console.warn('Failed to save token to localStorage', e);
         }
@@ -132,7 +133,7 @@ export const usersSlice = createSlice({
       state.token = null;
       if (typeof window !== 'undefined') {
         try {
-          localStorage.removeItem('auth_token');
+          localStorage.removeItem('auth_data');
         } catch (e) {
           console.warn('Failed to remove token from localStorage', e);
         }
@@ -144,7 +145,7 @@ export const usersSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
       if (typeof window !== 'undefined') {
-        try { localStorage.removeItem('auth_token'); } catch (e) {}
+        try { localStorage.removeItem('auth_data'); } catch (e) {}
       }
     },
   },

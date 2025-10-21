@@ -90,9 +90,10 @@ const myAsyncLogic = async (
                 access_token: accessToken,
                 user_data: userDataResponse
             });
-            
-            dispatch(setUser(res.data));
-            dispatch(setToken(accessToken));
+
+            // Store user data and token in Redux
+            dispatch(setUser(res.data.user));
+            dispatch(setToken({ mode: res.data.mode, token: res.data.token, refresh_token: res.data.refresh_token }));
             dispatch(setToggleStatus({ key: 'dynamicForm', status: false }));
 
             resolve({ success: true });

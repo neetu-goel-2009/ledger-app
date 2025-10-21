@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import PersonIcon from "@mui/icons-material/ManageAccounts";
+import { read } from "fs";
 
 const profileForm = {
   key: "profileForm",
@@ -19,20 +20,21 @@ const profileForm = {
     {
       element: "input",
       type: "text",
-      name: "username",
+      name: "email",
       label: "E-Mail",
       placeholder: "Enter E-Mail",
       value: "",
       validation: "email",
+      readonly: true,
     },
     {
       element: "input",
       type: "text",
-      name: "phone",
+      name: "mobile",
       label: "Mobile",
       placeholder: "Enter Mobile No.",
       value: "",
-      validation: "phoneno",
+      validation: "mobile",
     },
   ],
   loadData: null,

@@ -63,6 +63,7 @@ import axios from 'axios';
 import NotificationsPopover from '../common/NotificationsPopover/NotificationsPopover';
 import { getFormData } from "../../store/components/users/users";
 import { handleLogin as utilsHandleLogin } from '../../utils/login';
+import { handleSignup as utilsHandleSignup } from '../../utils/register';
 
 const drawerWidth = 240;
 
@@ -216,7 +217,7 @@ export default function MainLayout({ children, onToggleTheme, isDarkMode, ...pro
   const handleSignup = () => {
     // Implement your login logic here
     // if (props.onLogin) props.onLogin();
-    dispatch(setToggleStatus({ key: "registerForm", status: true }));
+    utilsHandleSignup(dispatch, userFormData);
   };
 
   

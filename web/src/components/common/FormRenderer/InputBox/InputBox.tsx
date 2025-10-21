@@ -7,7 +7,8 @@ import {
   FormHelperText,
   Typography,
   useTheme,
-  alpha
+  alpha,
+  Tooltip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -72,14 +73,107 @@ interface InputBoxProps {
   required?: boolean;
   type?: string;
   validation?: string;
+  /** Optional tooltip/title to show when field is readonly */
+  readOnlyTitle?: string;
   [key: string]: any;
 }
 
 const InputBox = (props: InputBoxProps) => {
-  const { label, name, required = false, validation, ...rest } = props;
+  const { label, name, required = false, validation, InputProps, readOnly, readonly, readOnlyTitle, ...rest } = props;
   const isRequired = required || validation === 'required' || validation === 'email' || validation === 'password';
   const type = rest.type || "text";
 
+  // Merge readonly flag into MUI InputProps.inputProps.readOnly so the native input is readonly
+  const finalReadOnly = readOnly ?? readonly ?? InputProps?.inputProps?.readOnly ?? false;
+  const mergedInputProps = {
+    ...(InputProps || {}),
+    inputProps: {
+      ...(InputProps?.inputProps || {}),
+      readOnly: finalReadOnly,
+    },
+  };
+
+  const StyledInput = (field, form) => (<StyledTextField
+                      {...field}
+                      id={name}
+                      label={
+                        <Typography 
+                          component="span" 
+                          sx={{ 
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 0.5,
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                            color: (theme) => theme.palette.mode === 'light' 
+                              ? alpha(theme.palette.text.primary, 0.9)
+                              : alpha(theme.palette.text.primary, 0.95),
+                            letterSpacing: '0.02em',
+                            textTransform: 'capitalize',
+                            position: 'relative',
+                            '&::after': {
+                              content: '""',
+                              position: 'absolute',
+                              left: 0,
+                              right: 0,
+                              bottom: -2,
+                              height: 1,
+                              backgroundColor: 'transparent',
+                              transition: (theme) => theme.transitions.create('background-color'),
+                            },
+                            '.Mui-focused &::after': {
+                              backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                            }
+                          }}
+                        >
+                          {label}
+                          {isRequired && (
+                            <Typography
+                              component="span"
+                              sx={{ 
+                                ml: 0.5,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                lineHeight: 1,
+                                color: (theme) => theme.palette.error.main,
+                                opacity: 0.9,
+                                transform: 'translateY(-2px)',
+                                display: 'inline-flex',
+                                alignItems: 'center'
+                              }}
+                            >
+                              *
+                            </Typography>
+                          )}
+                        </Typography>
+                      }
+                      type={type}
+                      error={form.errors[name] && form.touched[name]}
+                      helperText={
+                        form.errors[name] && form.touched[name] ? (
+                          <ErrorMessage name={name} />
+                        ) : null
+                      }
+                      variant="outlined"
+                      fullWidth
+                      size="medium"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          padding: '12px 14px',
+                          fontSize: '0.95rem',
+                        },
+                      }}
+                      InputProps={{
+                        ...(mergedInputProps || {}),
+                        sx: {
+                          ...(mergedInputProps?.sx || {}),
+                          '&::placeholder': {
+                            opacity: 0.7,
+                          },
+                        },
+                      }}
+                      {...rest}
+                    />);
   return (
     <>
       {type === "hidden" ? (
@@ -97,85 +191,17 @@ const InputBox = (props: InputBoxProps) => {
                 },
               }}
             >
-              <StyledTextField
-                {...field}
-                id={name}
-                label={
-                  <Typography 
-                    component="span" 
-                    sx={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 0.5,
-                      fontSize: '0.875rem',
-                      fontWeight: 500,
-                      color: (theme) => theme.palette.mode === 'light' 
-                        ? alpha(theme.palette.text.primary, 0.9)
-                        : alpha(theme.palette.text.primary, 0.95),
-                      letterSpacing: '0.02em',
-                      textTransform: 'capitalize',
-                      position: 'relative',
-                      '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        bottom: -2,
-                        height: 1,
-                        backgroundColor: 'transparent',
-                        transition: (theme) => theme.transitions.create('background-color'),
-                      },
-                      '.Mui-focused &::after': {
-                        backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.2),
-                      }
-                    }}
-                  >
-                    {label}
-                    {isRequired && (
-                      <Typography
-                        component="span"
-                        sx={{ 
-                          ml: 0.5,
-                          fontSize: '0.75rem',
-                          fontWeight: 600,
-                          lineHeight: 1,
-                          color: (theme) => theme.palette.error.main,
-                          opacity: 0.9,
-                          transform: 'translateY(-2px)',
-                          display: 'inline-flex',
-                          alignItems: 'center'
-                        }}
-                      >
-                        *
-                      </Typography>
-                    )}
-                  </Typography>
-                }
-                type={type}
-                error={form.errors[name] && form.touched[name]}
-                helperText={
-                  form.errors[name] && form.touched[name] ? (
-                    <ErrorMessage name={name} />
-                  ) : null
-                }
-                variant="outlined"
-                fullWidth
-                size="medium"
-                sx={{
-                  '& .MuiInputBase-input': {
-                    padding: '12px 14px',
-                    fontSize: '0.95rem',
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    '&::placeholder': {
-                      opacity: 0.7,
-                    },
-                  },
-                }}
-                {...rest}
-              />
+              {finalReadOnly ? (
+                <Tooltip title={readOnlyTitle ?? 'Read-only field'} arrow>
+                  <span>
+                    {StyledInput(field, form)}
+                  </span>
+                </Tooltip>
+              ) : (
+                <>
+                  {StyledInput(field, form)}
+                </>
+              )}
             </FormControl>
           )}
         </Field>
