@@ -1,0 +1,25 @@
+@use "../../../styles/variables.scss" as *;
+
+.tile-small {
+  width: 232px;
+  height: 64px;
+  border: 1px solid $elementbg;
+  border-radius: 4px;
+  background-color: $elementbg;
+
+  .tile-head {
+    padding: 14px 15px;
+    color: $textcolor1;
+    font-size: 10px;
+    line-height: 11.5px;
+    font-weight: 700;
+  }
+
+  .tile-val {
+    padding: 0px 15px;
+    color: $textcolor2;
+    font-size: 15px;
+    line-height: 17.25px;
+    font-weight: 700;
+  }
+}

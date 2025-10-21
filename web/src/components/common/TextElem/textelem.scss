@@ -1,0 +1,40 @@
+@use "../../../styles/variables.scss" as *;
+
+.text-elem {
+  font-size: 12px !important;
+  &.text-s1 {
+    color: $textcolor1 !important;
+  }
+  &.text-s2 {
+    color: $textcolor1 !important;
+  }
+  &.text-s3 {
+    color: $textcolor1 !important;
+  }
+  &.text-hr {
+    color: $textcolor1 !important;
+  }
+
+  &.text-c1 {
+    color: $cardcolor1 !important;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 1);
+  }
+  &.text-c2 {
+    color: $cardcolor1 !important;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 1);
+  }
+  &.text-c3 {
+    color: $textcolor1 !important;
+    text-align: center;
+  }
+
+  &.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 16px;
+    white-space: nowrap;
+    // display: -webkit-box;
+    // WebkitBoxOrient: "vertical",
+    // WebkitLineClamp: '2',
+  }
+}

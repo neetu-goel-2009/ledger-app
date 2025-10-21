@@ -1,0 +1,28 @@
+@use "../../styles/variables.scss" as *;
+
+.graph-info {
+  // width: 100%;
+  // height: 380px;
+  // border-radius: 4px;
+  // background-color: #fff;
+
+  .graph-info-heading {
+    font-size: 10px;
+    line-height: 11.5px;
+    font-weight: 400;
+    color: $textcolor1;
+  }
+
+  .graph-info-data {
+    padding-top: 20px;
+    font-size: 10px;
+    line-height: 18px;
+    font-weight: 400;
+    color: $textLink;
+
+    li {
+      list-style-type: initial;
+      list-style-position: inside;
+    }
+  }
+}

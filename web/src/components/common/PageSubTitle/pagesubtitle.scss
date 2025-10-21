@@ -1,0 +1,18 @@
+@use "../../../styles/variables.scss" as *;
+
+.page-heading-1 {
+  font-size: 15px;
+  line-height: 17.25px;
+  font-weight: 700;
+  text-align: right;
+  color: #000000;
+  padding-bottom: 20px;
+}
+
+.page-heading-2 {
+  font-size: 12px;
+  line-height: 13.8px;
+  font-weight: 700;
+  text-align: right;
+  color: $textcolor1;
+}

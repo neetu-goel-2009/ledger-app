@@ -1,0 +1,64 @@
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
+
+:root {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --f7-navbar-title-font-size: 1rem;
+  --f7-navbar-font-size: 0.75rem;
+  --f7-navbar-height: 3rem;
+
+  --f7-md-surface: #f6dbff;
+  --f7-md-on-surface: #1b1b1f;
+  --f7-md-surface-variant: #e1e2ec;
+  --f7-md-on-surface-variant: #44474f;
+  --f7-md-outline: #74777f;
+  --f7-md-outline-variant: #c4c6d0;
+  --f7-md-inverse-surface: #303033;
+  --f7-md-inverse-on-surface: #f2f0f4;
+  --f7-md-inverse-primary: #adc6ff;
+
+  --f7-md-surface-1: #f1f3fc;
+  --f7-md-surface-2: #b66cd7;
+  --f7-md-surface-3: #e2e9f8;
+  --f7-md-surface-4: #e0e8f8;
+  --f7-md-surface-5: #dae5f6;
+
+  --f7-toolbar-height: 3rem;
+  --f7-toolbar-font-size: 0.75rem;
+  --f7-toolbar-inner-padding-left: 0px;
+  --f7-toolbar-inner-padding-right: 0px;
+  --f7-tabbar-icons-height: 80px;
+  --f7-tabbar-icons-tablet-height: 80px;
+  --f7-tabbar-icon-size: 24px;
+  --f7-tabbar-link-text-transform: none;
+  --f7-tabbar-link-font-weight: 500;
+  --f7-tabbar-link-letter-spacing: 0;
+  --f7-toolbar-link-font-weight: 500;
+  --f7-tabbar-label-font-size: 12px;
+  --f7-tabbar-label-tablet-font-size: 12px;
+  --f7-tabbar-label-font-weight: 500;
+  --f7-tabbar-label-letter-spacing: 0;
+}
+
+.popup-from-left {
+  transform: translate3d(100vw, 0, 0);
+}
+.popup.modal-out {
+  transform: translate3d(100vw, 0, 0);
+}

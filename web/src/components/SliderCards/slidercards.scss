@@ -1,0 +1,51 @@
+.slider-cards {
+  .swiper {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
+  }
+
+  .swiper-slide {
+    width: 125px;
+    position: relative;
+    // height: calc((100% - 30px) / 2) !important;
+    /* Center slide text vertically */
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+
+    .card {
+      display: block;
+      width: 100%;
+      height: 70%;
+      background-color: #000;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 0 1rem;
+      margin: 0;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .card-info {
+      display: block;
+      width: 100%;
+      height: 30%;
+      padding: 0.2rem 0.2rem;
+      margin: 0;
+      color: #000;
+    }
+  }
+
+  .text-header {
+    position: absolute;
+    bottom: 20px;
+  }
+  .text-sub-header {
+    position: absolute;
+    bottom: 6px;
+  }
+}

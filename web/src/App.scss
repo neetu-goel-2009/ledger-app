@@ -1,0 +1,418 @@
+// @import "framework7/framework7-bundle.css";
+@use "./styles/variables.scss" as *;
+@use "./styles/font.scss" as *;
+
+// Reset and base styles
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background-color: $bodybg;
+  color: $text-primary;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 $spacing-sm;
+  }
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 $spacing-md 0;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+h1 {
+  font-size: 2.5rem;
+  @media (max-width: $breakpoint-sm) {
+    font-size: 2rem;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.75rem;
+  }
+}
+
+h3 {
+  font-size: 1.75rem;
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.5rem;
+  }
+}
+
+p {
+  margin: 0 0 $spacing-md 0;
+  color: $text-secondary;
+}
+
+// Links
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: $primary-dark;
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+// Buttons
+button {
+  border-radius: $border-radius-md;
+  border: none;
+  padding: $spacing-sm $spacing-lg;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px $shadow-medium;
+  }
+  
+  &:focus {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Food ecommerce specific components
+.food-card {
+  background: $card-bg;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 2px 8px $shadow-light;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 16px $shadow-medium;
+    transform: translateY(-2px);
+  }
+  
+  .food-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .food-content {
+    padding: $spacing-lg;
+  }
+  
+  .food-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: $spacing-sm;
+    color: $text-primary;
+  }
+  
+  .food-description {
+    color: $text-secondary;
+    margin-bottom: $spacing-md;
+    line-height: 1.5;
+  }
+  
+  .food-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: $spacing-md;
+  }
+  
+  .food-tags {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-md;
+  }
+  
+  .food-tag {
+    background: $surface-bg;
+    color: $text-secondary;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+}
+
+// Responsive grid system
+.grid {
+  display: grid;
+  gap: $spacing-lg;
+  
+  &.grid-1 { grid-template-columns: 1fr; }
+  &.grid-2 { grid-template-columns: repeat(2, 1fr); }
+  &.grid-3 { grid-template-columns: repeat(3, 1fr); }
+  &.grid-4 { grid-template-columns: repeat(4, 1fr); }
+  
+  @media (max-width: $breakpoint-lg) {
+    &.grid-4 { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    &.grid-3, &.grid-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    &.grid-2, &.grid-3, &.grid-4 { grid-template-columns: 1fr; }
+    gap: $spacing-md;
+  }
+}
+
+// Utility classes
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: $spacing-xs; }
+.mb-2 { margin-bottom: $spacing-sm; }
+.mb-3 { margin-bottom: $spacing-md; }
+.mb-4 { margin-bottom: $spacing-lg; }
+.mb-5 { margin-bottom: $spacing-xl; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: $spacing-xs; }
+.mt-2 { margin-top: $spacing-sm; }
+.mt-3 { margin-top: $spacing-md; }
+.mt-4 { margin-top: $spacing-lg; }
+.mt-5 { margin-top: $spacing-xl; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: $spacing-xs; }
+.p-2 { padding: $spacing-sm; }
+.p-3 { padding: $spacing-md; }
+.p-4 { padding: $spacing-lg; }
+.p-5 { padding: $spacing-xl; }
+
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+.d-block { display: block; }
+.d-none { display: none; }
+
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+
+// Food-specific utility classes
+.food-fresh { color: $food-fresh; }
+.food-spicy { color: $food-spicy; }
+.food-sweet { color: $food-sweet; }
+.food-savory { color: $food-savory; }
+
+.bg-primary { background-color: $primary; }
+.bg-secondary { background-color: $secondary; }
+.bg-accent { background-color: $accent; }
+.bg-success { background-color: $success; }
+.bg-warning { background-color: $warning; }
+.bg-error { background-color: $error; }
+
+.text-primary { color: $primary; }
+.text-secondary { color: $secondary; }
+.text-accent { color: $accent; }
+.text-success { color: $success; }
+.text-warning { color: $warning; }
+.text-error { color: $error; }
+
+// Responsive visibility
+@media (max-width: $breakpoint-sm) {
+  .hide-mobile { display: none; }
+  .show-mobile { display: block; }
+}
+
+@media (min-width: $breakpoint-sm) {
+  .show-mobile { display: none; }
+  .hide-mobile { display: block; }
+}
+
+// Custom components
+.location-icon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: $primary;
+  font-size: 1rem;
+}
+
+.div-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Custom dropdown (updated styling)
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: $spacing-sm;
+  
+  select {
+    background-color: $card-bg;
+    color: $text-primary;
+    font-size: inherit;
+    padding: $spacing-sm $spacing-lg;
+    border: 1px solid $border-light;
+    border-radius: $border-radius-md;
+    text-indent: 0.01px;
+    text-overflow: "";
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.2s ease;
+    
+    &:hover {
+      border-color: $primary;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+    }
+  }
+  
+  &::-ms-expand {
+    display: none;
+  }
+  
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  &::after {
+    content: "\25BC";
+    font-size: 0.625em;
+    line-height: 1;
+    right: $spacing-md;
+    bottom: 50%;
+    transform: translateY(50%);
+    color: $text-secondary;
+  }
+  
+  &::before {
+    width: 2em;
+    right: 0;
+    height: 100%;
+    border-radius: 0 $border-radius-md $border-radius-md 0;
+    background-color: $surface-bg;
+  }
+  
+  select[disabled] {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+}
+
+// Chart styling
+.recharts-text.recharts-cartesian-axis-tick-value {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 11.5px;
+  color: $text-secondary;
+}
+
+// Framework7 specific overrides
+.popover-change-site {
+  top: 55px !important;
+  
+  .popover-arrow {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+// Loading states
+.loading-skeleton {
+  background: linear-gradient(90deg, $surface-bg 25%, $border-light 50%, $surface-bg 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: $border-radius-sm;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Smooth transitions
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.browser-version .ledger-popup {
+  border-radius: 0 !important;
+}

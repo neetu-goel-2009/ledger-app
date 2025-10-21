@@ -1,0 +1,219 @@
+@use "../../styles/variables.scss" as *;
+
+.home {
+  background: $bodybg;
+  min-height: 100vh;
+  padding-bottom: 64px; // Space for mobile footer
+  
+  @media (min-width: $breakpoint-md) {
+    padding-bottom: 0;
+  }
+
+  // Page content styling
+  .page-content {
+    padding: 0;
+    background: transparent;
+  }
+
+  // Hero section
+  .hero-section {
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: $text-inverse;
+    padding: $spacing-xxl 0;
+    margin-bottom: $spacing-xxl;
+    
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-xl 0;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  // Category chips
+  .category-chip {
+    transition: all 0.2s ease;
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px $shadow-medium;
+    }
+  }
+
+  // Food cards grid
+  .food-grid {
+    margin-bottom: $spacing-xxl;
+    
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  // Category cards
+  .category-card {
+    background: $card-bg;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid $border-light;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px $shadow-medium;
+    }
+    
+    .category-icon {
+      font-size: 2rem;
+      margin-bottom: $spacing-md;
+    }
+    
+    .category-name {
+      font-weight: 600;
+      margin-bottom: $spacing-sm;
+      color: $text-primary;
+    }
+    
+    .category-count {
+      color: $text-secondary;
+      font-size: 0.875rem;
+    }
+  }
+
+  // Special offers section
+  .offers-section {
+    margin-bottom: $spacing-xxl;
+    
+    .offer-card {
+      background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+      color: $text-inverse;
+      border-radius: $border-radius-xl;
+      padding: $spacing-xl;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      .offer-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: $spacing-md;
+        
+        @media (max-width: $breakpoint-sm) {
+          font-size: 2rem;
+        }
+      }
+      
+      .offer-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: $spacing-lg;
+        opacity: 0.9;
+      }
+      
+      .offer-code {
+        background: rgba(255, 255, 255, 0.2);
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-md;
+        font-weight: 600;
+        display: inline-block;
+      }
+    }
+  }
+
+  // Section headers
+  .section-header {
+    margin-bottom: $spacing-lg;
+    
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: $spacing-sm;
+      
+      @media (max-width: $breakpoint-sm) {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .section-subtitle {
+      color: $text-secondary;
+      font-size: 1rem;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: $breakpoint-sm) {
+    .container {
+      padding: 0 $spacing-sm;
+    }
+    
+    .hero-section {
+      text-align: center;
+    }
+    
+    .category-chips {
+      justify-content: center;
+    }
+  }
+
+  // Animations
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+
+  // Loading states
+  .loading-skeleton {
+    background: linear-gradient(90deg, $surface-bg 25%, $border-light 50%, $surface-bg 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: $border-radius-sm;
+    height: 200px;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  // Utility classes for the home page
+  .text-gradient {
+    background: linear-gradient(135deg, $primary 0%, $accent 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px $shadow-medium;
+    }
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}

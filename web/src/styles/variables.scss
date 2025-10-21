@@ -1,0 +1,91 @@
+// Food Ecommerce Theme Colors
+$primary: #2196F3; // Vibrant orange
+$primary-light: #FF8A65;
+$primary-dark: #E64A19;
+
+$secondary: #2E7D32; // Green for freshness
+$secondary-light: #4CAF50;
+$secondary-dark: #1B5E20;
+
+$accent: #FF9800; // Warm orange for highlights
+$accent-light: #FFB74D;
+$accent-dark: #F57C00;
+
+// Background Colors
+$bodybg: #FAFAFA;
+$elementbg: #FFFFFF;
+$card-bg: #FFFFFF;
+$surface-bg: #F5F5F5;
+
+// Text Colors
+$text-primary: #212121;
+$text-secondary: #757575;
+$text-disabled: #BDBDBD;
+$text-inverse: #FFFFFF;
+
+// Status Colors
+$success: #388E3C;
+$warning: #FF9800;
+$error: #D32F2F;
+$info: #1976D2;
+
+// Food-specific Colors
+$food-fresh: #4CAF50;
+$food-spicy: #F44336;
+$food-sweet: #E91E63;
+$food-savory: #795548;
+
+// Border Colors
+$border-light: #E0E0E0;
+$border-medium: #BDBDBD;
+$border-dark: #757575;
+
+// Shadow Colors
+$shadow-light: rgba(0, 0, 0, 0.08);
+$shadow-medium: rgba(0, 0, 0, 0.12);
+$shadow-dark: rgba(0, 0, 0, 0.16);
+
+// Legacy variables for backward compatibility
+$redcolor: $error;
+$textcolor1: $text-secondary;
+$textcolor2: $text-primary;
+$textLink: $primary;
+$cardcolor1: $card-bg;
+$blueBG: #EBF5FF;
+$blueText: #1976D2;
+$neutral1: #525252;
+$neutral2: #EDF2F4;
+$neutral3: #FFFFFF;
+$background4: #F9F9F9;
+$textHeading: $primary;
+$textHeading2: $secondary;
+$textHeading3: $accent;
+$textSuggestion: #66BFFF;
+$textGray3: #737373;
+$textLightGray1: #E2E2E2;
+$textLightGray2: #A0A0A0;
+$textBlack: #000000;
+$headerMinHeight: 64px;
+$fieldBorder1: rgba(0, 0, 0, 0.23);
+$fieldBorder2: #C1C7CD;
+
+// Responsive breakpoints
+$breakpoint-xs: 0px;
+$breakpoint-sm: 600px;
+$breakpoint-md: 960px;
+$breakpoint-lg: 1280px;
+$breakpoint-xl: 1920px;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// Border radius
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;

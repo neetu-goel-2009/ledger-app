@@ -1,0 +1,14 @@
+.search-component {
+  position: sticky;
+  top: 0.5rem;
+
+  &.sticky-top {
+    position: sticky;
+    // top: 0px;
+    top: -1px;
+    z-index: 10;
+    background: var(--f7-md-surface);
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+}

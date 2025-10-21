@@ -1,0 +1,297 @@
+@use "../../../styles/variables.scss" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: $card-bg;
+  color: $text-primary;
+  height: $headerMinHeight;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-md;
+  z-index: 1000;
+  box-shadow: 0 2px 8px $shadow-light;
+  border-bottom: 1px solid $border-light;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+
+  @media (max-width: $breakpoint-sm) {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: $spacing-xs $spacing-sm;
+    padding: $spacing-sm;
+    height: auto;
+  }
+
+  // Left Section
+  .header-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-row: 1 / 3;
+      align-self: center;
+    }
+
+    img {
+      border-radius: $border-radius-sm;
+      transition: transform 0.2s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Title Section
+  .header-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    min-width: 0; // Allow shrinking
+    padding: 0 $spacing-sm;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+      display: grid;
+      grid-template-rows: subgrid;
+      padding: 0;
+
+      .location-section {
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        border: 1px solid $border-light;
+        border-radius: $border-radius-md;
+        padding: $spacing-xs;
+      }
+
+      .search-section {
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        border: 1px solid $border-light;
+        border-radius: $border-radius-md;
+        padding: $spacing-xs;
+      }
+    }
+
+    .header-search-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 48px;
+      max-width: 700px;
+      border: 1px solid $border-light;
+      border-radius: $border-radius-lg;
+      padding: $spacing-xs $spacing-sm;
+      background-color: $elementbg;
+      box-shadow: 0 1px 3px $shadow-light;
+      transition: box-shadow 0.2s ease;
+
+      &:hover {
+        box-shadow: 0 2px 8px $shadow-medium;
+      }
+
+      .location-section {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        flex: 0.7;
+        min-width: 0;
+
+        .location-text {
+          font-weight: 500;
+          color: $text-primary;
+          margin: 0 $spacing-xs;
+        }
+      }
+
+      .search-section {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 0;
+
+        .search-input {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .header-search-container-mobile {
+      width: 100%;
+
+      .location-section {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: $spacing-sm $spacing-xs;
+        border-bottom: 1px solid $border-light;
+
+        .location-text {
+          font-weight: 500;
+          margin-left: $spacing-xs;
+          flex: 1;
+          min-width: 0;
+        }
+      }
+
+      .search-section {
+        display: flex;
+        align-items: center;
+        padding: $spacing-sm $spacing-xs;
+
+        .search-input {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  // Right Section
+  .header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-row: 1 / 3;
+      align-self: center;
+    }
+
+    button {
+      width: 36px;
+    }
+  }
+
+  // Common button styles
+  .button {
+    background: transparent;
+    border: none;
+    padding: $spacing-sm;
+    border-radius: $border-radius-md;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: $surface-bg;
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Icon button styles
+  .MuiIconButton-root {
+    color: $text-secondary;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: $primary;
+      background-color: rgba($primary, 0.08);
+    }
+  }
+
+  // Badge styling
+  .MuiBadge-badge {
+    background: $primary !important;
+    color: $text-inverse !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    min-width: 18px !important;
+    height: 18px !important;
+  }
+
+  // Typography styles
+  .MuiTypography-root {
+    &.MuiTypography-body1,
+    &.MuiTypography-body2 {
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    &.MuiTypography-caption {
+      color: $text-secondary;
+      font-weight: 500;
+    }
+  }
+
+  // Mobile menu styles
+  .MuiMenu-paper {
+    border-radius: $border-radius-lg !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid $border-light !important;
+  }
+
+  .MuiMenuItem-root {
+    padding: $spacing-sm $spacing-md !important;
+    border-radius: $border-radius-sm !important;
+    margin: 2px $spacing-xs !important;
+    
+    &:hover {
+      background-color: rgba($primary, 0.08) !important;
+    }
+
+    .MuiListItemIcon-root {
+      color: $text-secondary;
+      min-width: 36px;
+    }
+
+    .MuiListItemText-primary {
+      font-weight: 500;
+      color: $text-primary;
+    }
+  }
+
+  .MuiDivider-root {
+    margin: $spacing-xs $spacing-sm !important;
+    border-color: $border-light !important;
+  }
+
+  // Animation for mobile menu
+  .MuiMenu-root {
+    .MuiPaper-root {
+      animation: slideInDown 0.2s ease-out;
+    }
+  }
+
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Hover effects for interactive elements
+  .header-left,
+  .header-right {
+    .MuiIconButton-root,
+    .button {
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  // Focus states for accessibility
+  .MuiIconButton-root:focus-visible,
+  .button:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,81 @@
+@use "../../../styles/variables.scss" as *;
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: $card-bg;
+  border-top: 1px solid $border-light;
+  box-shadow: 0 -2px 8px $shadow-light;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+
+  .toolbar {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .toolbar-inner {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+
+  .link {
+    color: $text-secondary;
+    text-decoration: none;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-sm;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: $primary;
+      background: $surface-bg;
+    }
+    
+    &.active {
+      color: $primary;
+      background: rgba(255, 107, 53, 0.1);
+    }
+  }
+}
+
+// Bottom navigation specific styles
+.MuiBottomNavigation-root {
+  .MuiBottomNavigationAction-root {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: $surface-bg;
+    }
+    
+    &.Mui-selected {
+      .MuiBottomNavigationAction-label {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Mobile specific adjustments
+@media (max-width: $breakpoint-sm) {
+  .footer {
+    .toolbar {
+      height: 64px;
+    }
+  }
+}
+
+// Ensure content doesn't get hidden behind footer
+.page-content {
+  padding-bottom: 64px;
+  
+  @media (min-width: $breakpoint-md) {
+    padding-bottom: 0;
+  }
+}
