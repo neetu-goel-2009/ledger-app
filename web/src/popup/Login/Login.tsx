@@ -19,7 +19,7 @@ import { getFormData } from "../../store/components/users/users";
 export default () => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(getLoginStatus);
-  const formData = useAppSelector(getFormData("loginForm"));
+  const formData = useAppSelector(getFormData)("loginForm");
 
   return (
     <DynamicForm dynamicFormData={formData}>

@@ -34,11 +34,12 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-import { getLoginStatus, getUser, logout } from "../../store/components/users/users";
+import { getFormData, getLoginStatus, getUser, logout } from "../../store/components/users/users";
 import {
   setToggleStatus,
   getToggleStatus,
 } from "../../store/components/uiInteraction/uiInteraction";
+import { handleProfileUpdate as utilsHandleProfileUpdate } from "../../utils/profile";
 
 export default () => {
   const isLoggedIn = useAppSelector(getLoginStatus);
@@ -47,6 +48,11 @@ export default () => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
+  const userFormData = useAppSelector(getFormData);
+
+  const handleProfileUpdate = () => {
+    utilsHandleProfileUpdate(dispatch, userFormData, { user });
+  };
 
   return (
     <Popup
@@ -118,7 +124,7 @@ export default () => {
               <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: 1 }}>
                 {user.name || user.fullName || 'No Name'}
               </Typography>
-              <Chip
+              {/* <Chip
                 label="Premium Member"
                 size="small"
                 sx={{
@@ -126,7 +132,7 @@ export default () => {
                   color: "primary.contrastText",
                   fontWeight: 500,
                 }}
-              />
+              /> */}
             </Box>
 
             {/* Profile Content */}
@@ -190,6 +196,9 @@ export default () => {
                   variant="outlined"
                   fullWidth
                   startIcon={<EditIcon />}
+                  onClick={() => {
+                    handleProfileUpdate();
+                  }}
                   sx={{
                     borderRadius: 2,
                     padding: "12px 24px",

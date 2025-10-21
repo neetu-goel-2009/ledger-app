@@ -58,10 +58,11 @@ import {
   logout,
 } from "../../store/components/users/users";
 import { LoginFormExtras } from '../login/LoginFormExtras';
-import { loadGoogleScript, getGoogleIdToken } from '../../utils/GoogleAuth';
+import { loadGoogleScript, getGoogleIdToken } from '../../utils/login/google/GoogleAuth';
 import axios from 'axios';
 import NotificationsPopover from '../common/NotificationsPopover/NotificationsPopover';
 import { getFormData } from "../../store/components/users/users";
+import { handleLogin as utilsHandleLogin } from '../../utils/login';
 
 const drawerWidth = 240;
 
@@ -209,19 +210,7 @@ export default function MainLayout({ children, onToggleTheme, isDarkMode, ...pro
   };
 
   const handleLogin = () => {
-    const loginFormData = userFormData("loginForm");
-    dispatch(setDynamicFormData([
-      { 
-        key: "formData", 
-        value: {
-          ...loginFormData,
-          postFormChildren: () => (
-            <LoginFormExtras dispatch={dispatch} isLoggedIn={isLoggedIn} />
-          )
-        }
-      },
-    ]));
-    dispatch(setToggleStatus({ key: "dynamicForm", status: true }));
+    utilsHandleLogin(dispatch, userFormData, isLoggedIn);
   };
 
   const handleSignup = () => {

@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Button, Divider, Typography } from "@mui/material";
 import { AppDispatch } from "../../store/store";
 import { setToggleStatus } from "../../store/components/uiInteraction/uiInteraction";
-import { handleGoogleLogin } from '../../utils/login/googleLogin';
-import { handleFacebookLogin } from '../../utils/login/facebookLogin';
+import { handleGoogleLogin } from '../../utils/login/google/googleLogin';
+import { handleFacebookLogin } from '../../utils/login/facebook/facebookLogin';
 
 interface LoginFormExtrasProps {
   dispatch: AppDispatch;

@@ -1,6 +1,6 @@
 // hooks/useAuth.ts
 import { useAppDispatch } from '../store/hooks';
-import { handleGoogleLogin } from '../utils/login/googleLogin';
+import { handleGoogleLogin } from '../utils/login/google/googleLogin';
 
 export const useAuth = () => {
   const dispatch = useAppDispatch();

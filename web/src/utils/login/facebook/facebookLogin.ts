@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { AppDispatch } from '../../store/store';
-import { setUser, setToken } from '../../store/components/users/users';
-import { setToggleStatus } from '../../store/components/uiInteraction/uiInteraction';
+import { AUTH_CONFIG } from '../../../config/auth.config';
+import { AppDispatch } from '../../../store/store';
+import { setUser, setToken } from '../../../store/components/users/users';
+import { setToggleStatus } from '../../../store/components/uiInteraction/uiInteraction';
 
 interface FacebookUserData {
   id: string;
@@ -85,7 +86,7 @@ const myAsyncLogic = async (
         }
 
         try {
-            const res = await axios.post('http://localhost:8000/api/users/facebook-login', { 
+            const res = await axios.post(`${AUTH_CONFIG.apiEndpoint}/users/facebook-login`, { 
                 access_token: accessToken,
                 user_data: userDataResponse
             });
@@ -106,7 +107,7 @@ const myAsyncLogic = async (
 };
 
 
-export const handleFacebookLogin = async (dispatch: AppDispatch, appId = '1177005857623472') => {
+export const handleFacebookLogin = async (dispatch: AppDispatch, appId = AUTH_CONFIG.facebookClientId) => {
   try {
     await loadFacebookSdk(appId);
 

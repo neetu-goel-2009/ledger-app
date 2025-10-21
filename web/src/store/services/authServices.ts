@@ -1,5 +1,5 @@
 // services/authService.ts
-import { AUTH_CONFIG } from '../config/auth.config';
+import { AUTH_CONFIG } from '../../config/auth.config';
 import axios from 'axios';
 
 export class AuthService {

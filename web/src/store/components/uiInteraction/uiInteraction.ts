@@ -32,7 +32,8 @@ export const uiInteractionSlice = createSlice({
   initialState,
   reducers: {
     setToggleStatus: (state, action) => {
-      state.activeForm = action.payload.key;
+      if (action.payload.status) state.activeForm = action.payload.key;
+      else state.activeForm = null;
       state.toggleStatus[action.payload.key] = action.payload.status;
     },
     setDynamicFormData: (state, action) => {

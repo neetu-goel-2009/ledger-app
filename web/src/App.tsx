@@ -20,8 +20,8 @@ import { useAppDispatch } from './store/hooks';
 import type { AppRoute } from './routes';
 
 const f7params = {
-  routes,
-  name: "Food Ecommerce App",
+  // routes,
+  // name: "Food Ecommerce App",
   // ...other params
 };
 

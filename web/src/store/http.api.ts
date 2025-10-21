@@ -1,7 +1,8 @@
 import axios from "axios";
+import { AUTH_CONFIG } from '../config/auth.config';
 
 export default () => {
   return axios.create({
-    baseURL: "http://localhost:8000/api",
+    baseURL: AUTH_CONFIG.apiEndpoint,
   });
 };

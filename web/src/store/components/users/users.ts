@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "../../services/userService";
 import signupForm from "./signup-form";
 import loginForm from "./login-form";
+import profileForm from "./profile-form";
 import { RootState } from "../../store";
 
 // Define types for the form structure
@@ -34,6 +35,7 @@ const initialState: UsersState = {
   forms: {
     loginForm: loginForm,
     signupForm: signupForm,
+    profileForm: profileForm,
   },
   isLoggedIn: false,
   token: null,
@@ -45,8 +47,7 @@ export const verifyStoredToken = createAsyncThunk(
   async (_, { dispatch }) => {
     const token = localStorage.getItem('auth_token');
     if (!token) return null;
-    
-    console.log({ token })
+
     try {
       const response = await userService.verifyToken(token);
       console.log({ response })
@@ -87,14 +88,15 @@ export const usersSlice = createSlice({
       
       console.log('After update:', state.forms[key]);
     },
-    setFormData1: (state, action) => {
+    setFormData: (state, action) => {
       const key = action.payload.key;
       const value = action.payload.value;
       if (state.forms[key]) {
         state.forms[key] = {
           ...state.forms[key],
           formElements: state.forms[key].formElements.map((item: any) => {
-            if (item.type === "text") item.value = "aaaa";
+            // if (item.type === "text") item.value = value[item.name] || "";
+            item.value = value[item.name] || "";
             return item;
           }),
         };
@@ -154,14 +156,13 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { updateFormStructure, setFormData1, setUser, updateUser, setToken, clearToken, logout } = usersSlice.actions;
+export const { updateFormStructure, setFormData, setUser, updateUser, setToken, clearToken, logout } = usersSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getLoginStatus = (state: RootState) => state.users.isLoggedIn;
 export const getUser = (state: RootState) => state.users.user;
 export const getToken = (state: RootState) => state.users.token;
 export const getFormData = (state: RootState) => (key: string) => {
-  console.log("aaaaaaaaaaaaaa", JSON.parse(JSON.stringify(state.users.forms[key])));
   return state.users.forms[key];
 }
 // export const getSignupForm = (state: RootState) => state.users.signupForm;

@@ -4,6 +4,7 @@ from sql_app.users import crud, models, schemas
 from sql_app.database import get_db, engine
 import requests
 from pydantic import BaseModel
+from typing import Optional
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -49,7 +50,6 @@ def verify_google_token(id_token: str):
 # Google login endpoint
 @router.post("/google-login", response_model=schemas.User)
 def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
-    print("111111111111111", payload.id_token)
     token_info = verify_google_token(payload.id_token)
     if not token_info:
         raise HTTPException(status_code=401, detail="Invalid Google token")
@@ -66,7 +66,8 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
         return db_user
     # Create new user
     user_in = schemas.UserCreate(email=email, name=name, picture=picture, mobile=mobile, misc=misc)
-    return crud.create_user(db, user=user_in)
+    db_user = crud.get_user_by_email(db, email=email)
+    return crud.create_user(db, user=db_user)
 
 
 # Facebook login endpoint
@@ -74,7 +75,6 @@ def google_login(payload: GoogleLoginRequest, db: Session = Depends(get_db)):
 def facebook_login(payload: FacebookLoginRequest, db: Session = Depends(get_db)):
     access_token = payload.access_token
     user_data = payload.user_data
-    print("22222222222222", access_token, user_data)
     # Verify the token is valid with Facebook
     resp = requests.get(
         "https://graph.facebook.com/me",
@@ -109,6 +109,36 @@ def facebook_login(payload: FacebookLoginRequest, db: Session = Depends(get_db))
 
     user_in = schemas.UserCreate(email=email, name=name, picture=picture, mobile=mobile, misc=misc)
     return crud.create_user(db, user=user_in)
+
+
+# Update user endpoint - partial updates supported
+class UpdateUserRequest(BaseModel):
+    email: Optional[str] = None
+    name: Optional[str] = None
+    picture: Optional[str] = None
+    mobile: Optional[str] = None
+    misc: Optional[dict] = None
+
+
+@router.put("/{user_id}", response_model=schemas.User)
+def update_user(user_id: int, payload: UpdateUserRequest, db: Session = Depends(get_db)):
+    db_user = crud.get_user(db, user_id=user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # If email is changing, ensure uniqueness
+    if payload.email and payload.email != db_user.email:
+        existing = crud.get_user_by_email(db, email=payload.email)
+        if existing and existing.id != db_user.id:
+            raise HTTPException(status_code=400, detail="Email already registered")
+
+    # Build kwargs only for provided fields
+    update_kwargs = {k: v for k, v in payload.dict().items() if v is not None}
+    if not update_kwargs:
+        return db_user
+
+    updated = crud.update_user(db, db_user, **update_kwargs)
+    return updated
 
 
 @router.post("/", response_model=schemas.User)
