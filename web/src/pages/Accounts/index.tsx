@@ -17,7 +17,9 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  useMediaQuery,
 } from '@mui/material';
+import AccountHeader from '../../components/AccountHeader/AccountHeader';
 import { Add as AddIcon } from '@mui/icons-material';
 import {
   Edit as EditIcon,
@@ -92,12 +94,15 @@ const TransactionSchema = Yup.object().shape({
     .min(3, 'Must be at least 3 characters'),
 });
 
+
 export default function Accounts() {
-    const [accounts, setAccounts] = useState<Account[]>([]);
+  const theme = useTheme();
+  const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
+  const [accounts, setAccounts] = useState<Account[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [openTransactionDialog, setOpenTransactionDialog] = useState(false);
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
-  const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+  const [selectedAccount, setSelectedAccount] = useState<Account | null>(initialAccounts[0]);
   const [transactionType, setTransactionType] = useState<'credit' | 'debit' | null>(null);
 
   const formik = useFormik({
@@ -203,8 +208,6 @@ export default function Accounts() {
     setSelectedAccount(selectedAccount?.id === account.id ? null : account);
   };
 
-
-
   const handleCloseTransactionDialog = () => {
     setOpenTransactionDialog(false);
     setTransactionType(null);
@@ -219,17 +222,16 @@ export default function Accounts() {
   };
 
   const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
-  const theme = useTheme();
 
   return (
     <Box>
-      <Box sx={{ 
+      {/* <Box sx={{ 
         display: 'flex', 
-        flexDirection: { xs: 'column', sm: 'row' },
+        flexDirection: { xs: 'row', sm: 'row' },
         alignItems: { xs: 'stretch', sm: 'center' },
         justifyContent: 'space-between', 
         gap: 2,
-        mb: 3 
+        mb: 2 
       }}>
         <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>
           Accounts
@@ -238,7 +240,7 @@ export default function Accounts() {
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           gap: 1,
-          flex: { xs: '1', sm: '0 0 auto' }
+          flex: { xs: '0 0 auto', sm: '0 0 auto' }
         }}>
           <StyledButton
             variant="contained"
@@ -246,27 +248,38 @@ export default function Accounts() {
             startIcon={<AddIcon sx={{ fontSize: 16 }} />}
             onClick={() => handleOpenDialog()}
           >
-            New Account
+            New
           </StyledButton>
         </Box>
-      </Box>
+      </Box> */}
 
-      <Paper sx={{ mb: 3, p: { xs: 2, sm: 3 } }}>
+      <AccountHeader
+        selectedAccount={selectedAccount}
+        onEditAccount={(account) => handleOpenDialog(account)}
+        onViewDetails={(account) => {
+          // You can implement a view details dialog or navigation here
+          // For now, we'll just select the account
+          setSelectedAccount(account);
+        }}
+        onAccountSelect={setSelectedAccount}
+      />
+
+      <Paper sx={{ mb: 3, p: { xs: 1, sm: 3 } }}>
         <Box sx={{ 
           display: 'flex', 
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: { xs: 'flex-start', sm: 'center' },
-          justifyContent: 'space-between',
+          justifyContent: { xs: 'center', sm: 'end' },
           gap: 2
         }}>
-          <Box>
+          {/* <Box>
             <Typography variant="h6" gutterBottom>
               Total Balance
             </Typography>
             <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', sm: '2.125rem' } }}>
               ${totalBalance.toLocaleString()}
             </Typography>
-          </Box>
+          </Box> */}
           <Box sx={{ 
             display: 'flex',
             flexDirection: { xs: 'row', sm: 'row' },

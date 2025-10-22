@@ -7,9 +7,7 @@ import MainLayout from './components/layout/MainLayout';
 import { routes } from './routes';
 
 import LeftPanel from './panels/LeftPanel';
-import Login from './popup/Login/Login';
 import Profile from './popup/Profile/Profile';
-import Register from './popup/Register/Register';
 import ChangeSite from './popovers/ChangeSite';
 import DynamicForm from './popup/DynamicForm/DynamicForm';
 import ReloadPrompt from './ReloadPrompt';
@@ -90,9 +88,7 @@ function App() {
           </Router>
           {/* Framework7 panels and popups */}
           <LeftPanel />
-          {/* <Login /> */}
           <Profile />
-          <Register />
           <DynamicForm />
           <ChangeSite />
           <ReloadPrompt />
