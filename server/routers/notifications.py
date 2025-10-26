@@ -8,10 +8,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 
-from ..sql_app.database import get_db
-from ..sql_app.notifications import crud as notifications_crud
-from ..utils import notification_utils
-from ..utils import queue as task_queue
+from sql_app.database import get_db
+from sql_app.notifications import crud as notifications_crud
+from utils import notification_utils
+from utils import queue as task_queue
 
 router = APIRouter()
 

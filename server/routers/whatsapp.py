@@ -6,9 +6,9 @@ import time
 import threading
 import logging
 
-from ..sql_app.database import get_db
-from ..utils import whatsapp_utils
-from ..sql_app.whatsapp import crud as whatsapp_crud
+from sql_app.database import get_db
+from utils import whatsapp_utils
+from sql_app.whatsapp import crud as whatsapp_crud
 
 router = APIRouter()
 logger = logging.getLogger("whatsapp.router")

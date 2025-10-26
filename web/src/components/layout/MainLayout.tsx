@@ -47,6 +47,8 @@ import {
 } from '@mui/icons-material';
 import Avatar from "../common/TextElem/Avatar";
 import { useLocation, useNavigate } from 'react-router-dom';
+// import logoSvg from '../../assets/icons/logo.svg';
+import logoJpg from '../../assets/icons/logo.png';
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setToggleStatus, setDynamicFormData } from "../../store/components/uiInteraction/uiInteraction";
@@ -172,6 +174,8 @@ export default function MainLayout({ children, onToggleTheme, isDarkMode, ...pro
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState(null);
   const [notificationAnchor, setNotificationAnchor] = useState<HTMLElement | null>(null);
   const userFormData = useAppSelector(getFormData);
+  const [logoFailed, setLogoFailed] = useState(false);
+  const logoSrc = (logoJpg as string);
   // const signupFormData = userFormData("signupForm");
 
   useEffect(() => {
@@ -281,17 +285,39 @@ const appBarObj = {
           >
             <MenuIcon />
           </IconButton>
-          <Typography 
-            variant="h6" 
-            noWrap 
-            component="div" 
-            sx={{ 
+          <Box
+            sx={{
               flexGrow: 1,
-              fontSize: { xs: '1.1rem', sm: '1.25rem' }
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            TallyXpert
-          </Typography>
+            {!logoFailed && logoSrc ? (
+              <Box
+                component="img"
+                src={logoSrc}
+                alt="TallyXpert"
+                onError={() => setLogoFailed(true)}
+                sx={{
+                  height: { xs: '2.5rem', sm: '3.5rem' },
+                  width: 'auto',
+                  display: 'block',
+                  objectFit: 'contain',
+                }}
+              />
+            ) : (
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  fontSize: { xs: '1.1rem', sm: '1.25rem' },
+                }}
+              >
+                TallyXpert
+              </Typography>
+            )}
+          </Box>
           <Stack direction="row" alignItems="center" spacing={2}>
             {appBarItems.map((item, index) => (
               <React.Fragment key={`${item.text}-${index}`}>

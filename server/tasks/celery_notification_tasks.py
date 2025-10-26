@@ -6,8 +6,8 @@ by Celery workers. Tasks create their own DB sessions for thread safety.
 """
 from celery import Celery
 import os
-from server.utils import notification_utils
-from server.sql_app.database import SessionLocal
+from utils import notification_utils
+from sql_app.database import SessionLocal
 
 # Initialize Celery app with Redis as broker and backend
 celery_app = Celery(

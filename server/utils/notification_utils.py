@@ -6,7 +6,7 @@ import requests
 
 from sqlalchemy.orm import Session
 
-from ..sql_app.notifications import crud as notifications_crud
+from sql_app.notifications import crud as notifications_crud
 
 logger = logging.getLogger("notification_utils")
 logger.setLevel(logging.INFO)

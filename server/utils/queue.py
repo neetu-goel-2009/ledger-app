@@ -7,7 +7,7 @@ import os
 import logging
 from typing import Any, Iterable, Mapping, Optional
 
-from server.tasks.celery_notification_tasks import celery_app
+from tasks.celery_notification_tasks import celery_app
 
 logger = logging.getLogger("server.queue")
 

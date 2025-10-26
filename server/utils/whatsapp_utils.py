@@ -6,7 +6,7 @@ import requests
 
 from sqlalchemy.orm import Session
 
-from ..sql_app.whatsapp import crud as whatsapp_crud
+from sql_app.whatsapp import crud as whatsapp_crud
 
 logger = logging.getLogger("whatsapp_utils")
 logger.setLevel(logging.INFO)

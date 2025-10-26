@@ -2,7 +2,6 @@ import {
   Popup,
   View,
   Icon,
-  Button,
   Navbar,
   NavTitle,
   NavLeft,
@@ -332,7 +331,7 @@ const Header = (props) => {
         <MenuItem onClick={handleMobileMenuClose}>
           <ListItemIcon>
             <Badge badgeContent={3} color="primary">
-              <ShoppingCartIcon fontSize="small" />
+              {/* <ShoppingCartIcon fontSize="small" /> */}
             </Badge>
           </ListItemIcon>
           <ListItemText>Cart (3)</ListItemText>
