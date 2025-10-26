@@ -2,7 +2,7 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dependencies import get_query_token, get_token_header
 from internal import admin
-from routers import users, library
+from routers import users, library, whatsapp, notifications
 
 from dotenv import load_dotenv
 
@@ -22,6 +22,8 @@ app.add_middleware(
 
 app.include_router(users.router, prefix="/api")
 app.include_router(library.router, prefix="/api")
+app.include_router(whatsapp.router, prefix="/api")
+app.include_router(notifications.router, prefix="/api")
 
 app.include_router(
     admin.router,
