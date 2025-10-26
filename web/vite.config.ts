@@ -9,9 +9,9 @@ const manifestForPlugIn: any = {
   injectRegister: "auto",
   includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
   manifest: {
-    name: "My-Ledger-App",
-    short_name: "mla",
-    description: "My Ledger Application",
+    name: "TallyXpert",
+    short_name: "txp",
+    description: "TallyXpert - Financial Management Application",
     icons: [
       {
         src: "pwa-192x192.png",

@@ -1,4 +1,4 @@
-# Ledger App - Server Documentation
+# TallyXpert - Server Documentation
 
 FastAPI backend with WhatsApp messaging and mobile push notification modules, featuring Celery-based background processing.
 
@@ -38,7 +38,8 @@ Configure these in `server/.env`:
 
 ```properties
 # Database
-RDS_URL=postgresql://postgres:postgres@localhost:5432/contractor-app
+```properties
+RDS_URL=postgresql://postgres:postgres@localhost:5432/tallyxpert
 
 # WhatsApp Provider (mock|twilio|meta)
 WHATSAPP_PROVIDER=mock

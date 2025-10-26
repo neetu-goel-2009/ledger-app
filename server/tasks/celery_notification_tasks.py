@@ -11,7 +11,7 @@ from server.sql_app.database import SessionLocal
 
 # Initialize Celery app with Redis as broker and backend
 celery_app = Celery(
-    "ledger_app",
+    "tallyxpert",
     broker=os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/0"),
     backend=os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379/0"),
 )

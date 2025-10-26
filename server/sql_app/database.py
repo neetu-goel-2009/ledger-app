@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/contractor-app' # os.getenv("RDS_URL")
+SQLALCHEMY_DATABASE_URL = os.getenv("RDS_URL", 'postgresql://postgres:postgres@localhost:5432/tallyxpert')
 print(SQLALCHEMY_DATABASE_URL)
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True if os.environ.get('SQLALCHEMY_ECHO', 'False') == 'False' else False, pool_size=20, max_overflow=0)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -121,7 +121,7 @@ const Header = (props) => {
               color="primary"
               sx={{ fontWeight: 700, letterSpacing: 1 }}
             >
-              Ledger App 1
+              TallyXpert
             </Typography>
           )}
         </Stack>

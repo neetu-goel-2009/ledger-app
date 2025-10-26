@@ -1,6 +1,6 @@
 """create notifications, device_tokens and whatsapp_messages tables
 
-Revision ID: 0001_create_notifications_and_whatsapp_tables
+Revision ID: 0001
 Revises: 
 Create Date: 2025-10-26 00:00:00.000000
 """
@@ -8,7 +8,7 @@ from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '0001_create_notifications_and_whatsapp_tables'
+revision = '0001'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -7,6 +7,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # add project root to sys.path so imports work when alembic runs from repo root
 HERE = os.path.dirname(os.path.dirname(__file__))
 if HERE not in sys.path:
@@ -20,13 +24,13 @@ config = context.config
 fileConfig(config.config_file_name)
 
 # Import your model's MetaData object here
-from server.sql_app.database import Base  # noqa: E402
+from sql_app.database import Base  # noqa: E402
 
 # Import models so they are registered on Base.metadata
 try:
     # import packages to ensure models are loaded
-    import server.sql_app.notifications.models as _notif_models  # noqa: F401,E402
-    import server.sql_app.whatsapp.models as _wh_models  # noqa: F401,E402
+    import sql_app.notifications.models as _notif_models  # noqa: F401,E402
+    import sql_app.whatsapp.models as _wh_models  # noqa: F401,E402
 except Exception:
     pass
 

@@ -290,7 +290,7 @@ const appBarObj = {
               fontSize: { xs: '1.1rem', sm: '1.25rem' }
             }}
           >
-            Ledger App
+            TallyXpert
           </Typography>
           <Stack direction="row" alignItems="center" spacing={2}>
             {appBarItems.map((item, index) => (
