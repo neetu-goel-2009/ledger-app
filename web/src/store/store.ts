@@ -3,12 +3,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import usersReducer from "./components/users/users";
 import libraryReducer from "./components/library/library";
 import uiInteractionReducer from "./components/uiInteraction/uiInteraction";
+import appReducer from "./components/app/app";
 
 export const store = configureStore({
   reducer: {
     users: usersReducer,
     library: libraryReducer,
     uiInteraction: uiInteractionReducer,
+    app: appReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

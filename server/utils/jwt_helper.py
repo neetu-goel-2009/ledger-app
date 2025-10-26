@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
+import os
 import jwt
 from typing import Dict, Optional
 
 # Configuration
-SECRET_KEY = "your-secret-key-here"  # In production, use a secure secret key from environment variables
-ALGORITHM = "HS256"
+# Prefer environment variable, fallback to a development default
+SECRET_KEY = os.getenv("JWT_SECRET", "change-this-secret")
+ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 30  # 30 days
 REFRESH_TOKEN_EXPIRE_DAYS = 90  # 90 days
 
@@ -43,7 +45,7 @@ def verify_jwt_token(token: str) -> Optional[Dict]:
     except jwt.ExpiredSignatureError:
         # Token has expired
         return None
-    except jwt.JWTError:
+    except jwt.InvalidTokenError:
         # Token is invalid
         return None
 
@@ -76,7 +78,7 @@ def get_token_data(token: str) -> Optional[Dict]:
         Optional[Dict]: The decoded token data if valid format, None if invalid
     """
     try:
-        # Decode without verification to get the payload
+        # Decode with verification (same as verify) to avoid returning tampered payloads
         decoded_token = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return decoded_token
     except Exception:

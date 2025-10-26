@@ -16,6 +16,12 @@ import './App.scss';
 import { verifyStoredToken } from './store/components/users/users';
 import { useAppDispatch } from './store/hooks';
 import type { AppRoute } from './routes';
+import { useAppSelector } from './store/hooks';
+import { getEnableOfflineMode } from './store/components/app/app';
+import useOfflineSync from './modules/offline/hooks/useOfflineSync';
+import { SyncProgressBar } from './modules/offline/components/SyncProgressBar';
+import { Fab } from '@mui/material';
+import SyncIcon from '@mui/icons-material/Sync';
 
 const f7params = {
   // routes,
@@ -40,6 +46,13 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = useTheme();
   const isMobile = !useMediaQuery(theme.breakpoints.up('sm'));
+  const enableOfflineMode = useAppSelector(getEnableOfflineMode);
+  const apiConfig = {
+    clients: '/api/clients/sync',
+    accounts: '/api/accounts/sync',
+    ledger: '/api/ledger/sync',
+  };
+  const { syncing, progress, startSync } = useOfflineSync(enableOfflineMode, apiConfig);
   
   useEffect(() => {
     // Verify token on app startup
@@ -86,6 +99,19 @@ function App() {
               </Suspense>
             </MainLayout>
           </Router>
+          {/* Offline sync UI */}
+          <SyncProgressBar visible={syncing} progress={progress} />
+          {enableOfflineMode && (
+            <Fab
+              color="primary"
+              aria-label="Sync Now"
+              onClick={() => startSync()}
+              sx={{ position: 'fixed', right: 16, bottom: 24, zIndex: (t) => t.zIndex.tooltip + 1 }}
+              size={isMobile ? 'medium' : 'large'}
+            >
+              <SyncIcon />
+            </Fab>
+          )}
           {/* Framework7 panels and popups */}
           <LeftPanel />
           <Profile />
